@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-03-31T00:00:00Z",
+  "categories": [
+    { "id": "adversary", "label": "Adversary Emulation", "icon": "crossed swords" },
+    { "id": "recon", "label": "Reconnaissance", "icon": "magnifying glass" },
+    { "id": "vuln", "label": "Vulnerability Assessment", "icon": "bug" },
+    { "id": "web", "label": "Web Security", "icon": "globe" },
+    { "id": "crypto", "label": "Cryptography & Cracking", "icon": "lock" },
+    { "id": "ad", "label": "Active Directory", "icon": "shield" },
+    { "id": "reversing", "label": "Reverse Engineering", "icon": "gear" },
+    { "id": "cloud", "label": "Cloud Security", "icon": "cloud" },
+    { "id": "phishing", "label": "Social Engineering", "icon": "envelope" },
+    { "id": "fuzzing", "label": "Fuzzing", "icon": "electric bolt" },
+    { "id": "llm-sec", "label": "LLM Security", "icon": "robot" }
+  ],
+  "servers": [
+    {
+      "registryId": "mi-caldera",
+      "name": "CALDERA",
+      "description": "MCP server for MITRE CALDERA adversary emulation platform API (read-only).",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "adversary",
+      "tags": ["caldera", "mitre", "adversary-emulation", "att&ck", "red-team"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/caldera" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [
+        {
+          "key": "CALDERA_API_URL",
+          "label": "CALDERA API URL",
+          "description": "Base URL of the CALDERA REST API.",
+          "type": "url",
+          "required": true,
+          "placeholder": "http://localhost:8888"
+        },
+        {
+          "key": "CALDERA_API_KEY",
+          "label": "API Key",
+          "description": "CALDERA API key for authentication.",
+          "type": "secret",
+          "required": false,
+          "placeholder": "your-caldera-api-key"
+        }
+      ],
+      "tools": [],
+      "externalDeps": []
+    },
+    {
+      "registryId": "mi-garak",
+      "name": "Garak",
+      "description": "MCP server wrapping garak for LLM vulnerability and safety scanning.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "llm-sec",
+      "tags": ["garak", "llm", "vulnerability", "safety", "red-team", "ai-security"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/garak" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "garak", "checkCommand": "garak --version", "installHint": "pip install garak" }
+      ]
+    },
+    {
+      "registryId": "mi-ffuf",
+      "name": "ffuf",
+      "description": "MCP server wrapping ffuf for web fuzzing and content discovery.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "web",
+      "tags": ["ffuf", "fuzzing", "web", "content-discovery", "brute-force"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/ffuf" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "ffuf", "checkCommand": "ffuf -V", "installHint": "brew install ffuf or go install github.com/ffuf/ffuf/v2@latest" }
+      ]
+    },
+    {
+      "registryId": "mi-bloodhound",
+      "name": "BloodHound",
+      "description": "MCP server for BloodHound CE API — Active Directory attack path analysis.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "ad",
+      "tags": ["bloodhound", "active-directory", "attack-path", "ad", "lateral-movement"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/bloodhound" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [
+        {
+          "key": "BLOODHOUND_URL",
+          "label": "BloodHound CE URL",
+          "description": "Base URL of the BloodHound CE API.",
+          "type": "url",
+          "required": true,
+          "placeholder": "http://localhost:8080"
+        },
+        {
+          "key": "BLOODHOUND_TOKEN",
+          "label": "API Token",
+          "description": "BloodHound CE API token.",
+          "type": "secret",
+          "required": false
+        }
+      ],
+      "tools": [],
+      "externalDeps": []
+    },
+    {
+      "registryId": "mi-credential-check",
+      "name": "Credential Check",
+      "description": "MCP server for credential security checks (HIBP, password policy, hash identification).",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "crypto",
+      "tags": ["credentials", "hibp", "password", "hash", "security-check"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/credential-check" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [
+        {
+          "key": "HIBP_API_KEY",
+          "label": "HIBP API Key",
+          "description": "Have I Been Pwned API key for breach lookups.",
+          "type": "secret",
+          "required": false,
+          "placeholder": "your-hibp-api-key"
+        }
+      ],
+      "tools": [],
+      "externalDeps": []
+    },
+    {
+      "registryId": "mi-impacket",
+      "name": "Impacket",
+      "description": "MCP server wrapping Impacket for Windows protocol assessment and Active Directory enumeration.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "ad",
+      "tags": ["impacket", "windows", "smb", "active-directory", "ntlm", "kerberos"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/impacket" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "impacket", "checkCommand": "python3 -c \"import impacket\"", "installHint": "pip install impacket" }
+      ]
+    },
+    {
+      "registryId": "mi-ghidra",
+      "name": "Ghidra",
+      "description": "MCP server wrapping Ghidra headless analyzer for reverse engineering.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "reversing",
+      "tags": ["ghidra", "reverse-engineering", "binary-analysis", "disassembly", "decompiler"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/ghidra" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [
+        {
+          "key": "GHIDRA_INSTALL_DIR",
+          "label": "Ghidra Install Directory",
+          "description": "Path to the Ghidra installation directory.",
+          "type": "path",
+          "required": true,
+          "placeholder": "/opt/ghidra"
+        }
+      ],
+      "tools": [],
+      "externalDeps": [
+        { "name": "ghidra", "checkCommand": "analyzeHeadless --help", "installHint": "Download from https://ghidra-sre.org" }
+      ]
+    },
+    {
+      "registryId": "mi-hashcat",
+      "name": "Hashcat",
+      "description": "MCP server wrapping hashcat for password hash analysis and cracking.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "crypto",
+      "tags": ["hashcat", "password", "hash", "cracking", "brute-force"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/hashcat" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "hashcat", "checkCommand": "hashcat --version", "installHint": "brew install hashcat or apt-get install hashcat" }
+      ]
+    },
+    {
+      "registryId": "mi-kubescape",
+      "name": "Kubescape",
+      "description": "MCP server wrapping Kubescape for Kubernetes security posture scanning.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "cloud",
+      "tags": ["kubescape", "kubernetes", "k8s", "security", "compliance", "nsa"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/kubescape" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "kubescape", "checkCommand": "kubescape version", "installHint": "curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash" }
+      ]
+    },
+    {
+      "registryId": "mi-boofuzz",
+      "name": "Boofuzz",
+      "description": "MCP server wrapping boofuzz for network protocol fuzzing.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "fuzzing",
+      "tags": ["boofuzz", "fuzzing", "protocol", "network", "crash-detection"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/boofuzz" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "boofuzz", "checkCommand": "python3 -c \"import boofuzz\"", "installHint": "pip install boofuzz" }
+      ]
+    },
+    {
+      "registryId": "mi-gophish",
+      "name": "GoPhish",
+      "description": "MCP server for GoPhish phishing simulation platform API (read-only).",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "phishing",
+      "tags": ["gophish", "phishing", "social-engineering", "simulation", "awareness"],
+      "version": "1.0.0",
+      "runtime": { "type": "node", "package": "@modular-intelligence/gophish" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [
+        {
+          "key": "GOPHISH_URL",
+          "label": "GoPhish API URL",
+          "description": "Base URL of the GoPhish API.",
+          "type": "url",
+          "required": true,
+          "placeholder": "https://localhost:3333"
+        },
+        {
+          "key": "GOPHISH_API_KEY",
+          "label": "API Key",
+          "description": "GoPhish API key for authentication.",
+          "type": "secret",
+          "required": true
+        }
+      ],
+      "tools": [],
+      "externalDeps": []
+    }
+  ]
+}
