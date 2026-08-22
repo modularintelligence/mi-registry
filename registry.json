@@ -944,6 +944,42 @@
       "externalDeps": [
         { "name": "yara", "checkCommand": "yara --version", "installHint": "brew install yara or apt-get install yara" }
       ]
+    },
+    {
+      "registryId": "mi-cve-lookup",
+      "name": "CVE Lookup",
+      "description": "MCP server for CVE & vulnerability database lookups (NVD, CISA KEV, Exploit-DB).",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "vuln",
+      "tags": ["cve", "nvd", "cisa-kev", "exploit-db", "vulnerability", "cvss"],
+      "version": "1.0.2",
+      "runtime": { "type": "node", "package": "@modular-intelligence/cve-lookup", "bin": "mcp-cve-lookup" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [
+        { "key": "NVD_API_KEY", "label": "NVD API Key", "description": "Optional NVD API key; raises the NVD rate limit. The other data sources need no credentials.", "type": "secret", "required": false }
+      ],
+      "tools": [],
+      "externalDeps": [
+        { "name": "searchsploit", "checkCommand": "searchsploit --version", "installHint": "Part of exploitdb: brew install exploitdb, or clone https://gitlab.com/exploit-database/exploitdb. Only the exploitdb_search tool needs it." }
+      ]
+    },
+    {
+      "registryId": "mi-sqlmap",
+      "name": "sqlmap",
+      "description": "MCP server wrapping sqlmap for authorized SQL injection testing.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "web",
+      "tags": ["sqlmap", "sql-injection", "web", "database", "pentest"],
+      "version": "1.0.2",
+      "runtime": { "type": "node", "package": "@modular-intelligence/sqlmap", "bin": "mcp-sqlmap" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "sqlmap", "checkCommand": "sqlmap --version", "installHint": "brew install sqlmap or pip install sqlmap" }
+      ]
     }
   ]
 }
