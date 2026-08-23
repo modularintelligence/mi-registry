@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-03-31T00:00:00Z",
+  "updatedAt": "2026-08-21T00:00:00Z",
   "categories": [
     { "id": "adversary", "label": "Adversary Emulation", "icon": "crossed swords" },
     { "id": "recon", "label": "Reconnaissance", "icon": "magnifying glass" },
@@ -52,7 +52,11 @@
       "version": "1.0.2",
       "runtime": { "type": "node", "package": "@modular-intelligence/bettercap", "bin": "mcp-bettercap" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
-      "parameters": [],
+      "parameters": [
+        { "key": "BETTERCAP_API_URL", "label": "Bettercap REST API URL", "description": "Local bettercap REST API endpoint. Connections are restricted to localhost.", "type": "url", "required": false, "placeholder": "http://127.0.0.1:8081" },
+        { "key": "BETTERCAP_API_USER", "label": "REST API Username", "type": "string", "required": false, "default": "user" },
+        { "key": "BETTERCAP_API_PASSWORD", "label": "REST API Password", "type": "secret", "required": false }
+      ],
       "tools": [],
       "externalDeps": [
         { "name": "bettercap", "checkCommand": "bettercap -eval quit", "installHint": "brew install bettercap or see https://www.bettercap.org/installation/" }
@@ -87,8 +91,8 @@
       "runtime": { "type": "node", "package": "@modular-intelligence/bloodhound", "bin": "mcp-bloodhound" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
-        { "key": "BLOODHOUND_URL", "label": "BloodHound CE URL", "description": "Base URL of the BloodHound CE API.", "type": "url", "required": true, "placeholder": "http://localhost:8080" },
-        { "key": "BLOODHOUND_TOKEN", "label": "API Token", "description": "BloodHound CE API token.", "type": "secret", "required": false }
+        { "key": "BLOODHOUND_API_URL", "label": "BloodHound CE URL", "description": "Base URL of the BloodHound CE API.", "type": "url", "required": true, "placeholder": "http://localhost:8080" },
+        { "key": "BLOODHOUND_API_KEY", "label": "API Key", "description": "BloodHound CE API key.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -530,7 +534,9 @@
       "version": "1.0.2",
       "runtime": { "type": "node", "package": "@modular-intelligence/nuclei-scanner", "bin": "mcp-nuclei-scanner" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
-      "parameters": [],
+      "parameters": [
+        { "key": "NUCLEI_API_KEY", "label": "Nuclei Cloud API Key", "description": "ProjectDiscovery Cloud API key. Optional — only needed for cloud-backed features.", "type": "secret", "required": false }
+      ],
       "tools": [],
       "externalDeps": [
         { "name": "nuclei", "checkCommand": "nuclei -version", "installHint": "brew install nuclei or go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest" }
@@ -631,7 +637,11 @@
       "version": "1.0.2",
       "runtime": { "type": "node", "package": "@modular-intelligence/secrets-scanner", "bin": "mcp-secrets-scanner" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
-      "parameters": [],
+      "parameters": [
+        { "key": "AWS_ACCESS_KEY_ID", "label": "AWS Access Key ID", "description": "Required only by the S3 scan tool; other tools need no credentials.", "type": "secret", "required": false },
+        { "key": "AWS_SECRET_ACCESS_KEY", "label": "AWS Secret Access Key", "type": "secret", "required": false },
+        { "key": "AWS_REGION", "label": "AWS Region", "type": "string", "required": false, "placeholder": "us-east-1" }
+      ],
       "tools": [],
       "externalDeps": [
         { "name": "trufflehog", "checkCommand": "trufflehog --version", "installHint": "brew install trufflehog" },
@@ -669,9 +679,11 @@
       "parameters": [
         { "key": "SPLUNK_URL", "label": "Splunk URL", "type": "url", "required": false, "placeholder": "https://splunk.example.com:8089" },
         { "key": "SPLUNK_TOKEN", "label": "Splunk Token", "type": "secret", "required": false },
-        { "key": "ELASTICSEARCH_URL", "label": "Elasticsearch URL", "type": "url", "required": false, "placeholder": "http://localhost:9200" },
+        { "key": "ELASTIC_URL", "label": "Elasticsearch URL", "type": "url", "required": false, "placeholder": "http://localhost:9200" },
+        { "key": "ELASTIC_API_KEY", "label": "Elasticsearch API Key", "type": "secret", "required": false },
         { "key": "WAZUH_URL", "label": "Wazuh URL", "type": "url", "required": false, "placeholder": "https://wazuh.example.com:55000" },
-        { "key": "WAZUH_TOKEN", "label": "Wazuh Token", "type": "secret", "required": false }
+        { "key": "WAZUH_USER", "label": "Wazuh Username", "type": "string", "required": false },
+        { "key": "WAZUH_PASSWORD", "label": "Wazuh Password", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -825,7 +837,7 @@
       "runtime": { "type": "node", "package": "@modular-intelligence/velociraptor", "bin": "mcp-velociraptor" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
-        { "key": "VELOCIRAPTOR_URL", "label": "Velociraptor API URL", "type": "url", "required": true, "placeholder": "https://velociraptor.example.com:8001" },
+        { "key": "VELOCIRAPTOR_API_URL", "label": "Velociraptor API URL", "type": "url", "required": true, "placeholder": "https://velociraptor.example.com:8001" },
         { "key": "VELOCIRAPTOR_API_KEY", "label": "API Key", "type": "secret", "required": true }
       ],
       "tools": [],
@@ -877,9 +889,9 @@
       "runtime": { "type": "node", "package": "@modular-intelligence/wazuh", "bin": "mcp-wazuh" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
-        { "key": "WAZUH_URL", "label": "Wazuh API URL", "type": "url", "required": true, "placeholder": "https://wazuh.example.com:55000" },
-        { "key": "WAZUH_USERNAME", "label": "Username", "type": "string", "required": true, "default": "wazuh-wui" },
-        { "key": "WAZUH_PASSWORD", "label": "Password", "type": "secret", "required": true }
+        { "key": "WAZUH_API_URL", "label": "Wazuh API URL", "type": "url", "required": true, "placeholder": "https://wazuh.example.com:55000" },
+        { "key": "WAZUH_API_USER", "label": "Username", "type": "string", "required": true, "default": "wazuh-wui" },
+        { "key": "WAZUH_API_PASSWORD", "label": "Password", "type": "secret", "required": true }
       ],
       "tools": [],
       "externalDeps": []
@@ -931,6 +943,42 @@
       "tools": [],
       "externalDeps": [
         { "name": "yara", "checkCommand": "yara --version", "installHint": "brew install yara or apt-get install yara" }
+      ]
+    },
+    {
+      "registryId": "mi-cve-lookup",
+      "name": "CVE Lookup",
+      "description": "MCP server for CVE & vulnerability database lookups (NVD, CISA KEV, Exploit-DB).",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "vuln",
+      "tags": ["cve", "nvd", "cisa-kev", "exploit-db", "vulnerability", "cvss"],
+      "version": "1.0.2",
+      "runtime": { "type": "node", "package": "@modular-intelligence/cve-lookup", "bin": "mcp-cve-lookup" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [
+        { "key": "NVD_API_KEY", "label": "NVD API Key", "description": "Optional NVD API key; raises the NVD rate limit. The other data sources need no credentials.", "type": "secret", "required": false }
+      ],
+      "tools": [],
+      "externalDeps": [
+        { "name": "searchsploit", "checkCommand": "searchsploit --version", "installHint": "Part of exploitdb: brew install exploitdb, or clone https://gitlab.com/exploit-database/exploitdb. Only the exploitdb_search tool needs it." }
+      ]
+    },
+    {
+      "registryId": "mi-sqlmap",
+      "name": "sqlmap",
+      "description": "MCP server wrapping sqlmap for authorized SQL injection testing.",
+      "author": "modular-intelligence",
+      "homepage": "https://github.com/modularintelligence/mcp-servers",
+      "category": "web",
+      "tags": ["sqlmap", "sql-injection", "web", "database", "pentest"],
+      "version": "1.0.2",
+      "runtime": { "type": "node", "package": "@modular-intelligence/sqlmap", "bin": "mcp-sqlmap" },
+      "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
+      "parameters": [],
+      "tools": [],
+      "externalDeps": [
+        { "name": "sqlmap", "checkCommand": "sqlmap --version", "installHint": "brew install sqlmap or pip install sqlmap" }
       ]
     }
   ]
