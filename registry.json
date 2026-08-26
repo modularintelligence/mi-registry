@@ -55,7 +55,10 @@
       "parameters": [
         { "key": "BETTERCAP_API_URL", "label": "Bettercap REST API URL", "description": "Local bettercap REST API endpoint. Connections are restricted to localhost.", "type": "url", "required": false, "placeholder": "http://127.0.0.1:8081" },
         { "key": "BETTERCAP_API_USER", "label": "REST API Username", "type": "string", "required": false, "default": "user" },
-        { "key": "BETTERCAP_API_PASSWORD", "label": "REST API Password", "type": "secret", "required": false }
+        { "key": "BETTERCAP_API_PASSWORD", "label": "REST API Password", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-BETTERCAP-API-URL", "label": "Bettercap REST API URL (multi-tenant header)", "description": "Per-request credential header carrying BETTERCAP_API_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-BETTERCAP-API-USER", "label": "REST API Username (multi-tenant header)", "description": "Per-request credential header carrying BETTERCAP_API_USER in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "string", "required": false },
+        { "key": "X-MCP-Cred-BETTERCAP-API-PASSWORD", "label": "REST API Password (multi-tenant header)", "description": "Per-request credential header carrying BETTERCAP_API_PASSWORD in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": [
@@ -92,7 +95,9 @@
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
         { "key": "BLOODHOUND_API_URL", "label": "BloodHound CE URL", "description": "Base URL of the BloodHound CE API.", "type": "url", "required": true, "placeholder": "http://localhost:8080" },
-        { "key": "BLOODHOUND_API_KEY", "label": "API Key", "description": "BloodHound CE API key.", "type": "secret", "required": false }
+        { "key": "BLOODHOUND_API_KEY", "label": "API Key", "description": "BloodHound CE API key.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-BLOODHOUND-API-URL", "label": "BloodHound CE URL (multi-tenant header)", "description": "Per-request credential header carrying BLOODHOUND_API_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-BLOODHOUND-API-KEY", "label": "API Key (multi-tenant header)", "description": "Per-request credential header carrying BLOODHOUND_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -127,7 +132,9 @@
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
         { "key": "CALDERA_API_URL", "label": "CALDERA API URL", "description": "Base URL of the CALDERA REST API.", "type": "url", "required": true, "placeholder": "http://localhost:8888" },
-        { "key": "CALDERA_API_KEY", "label": "API Key", "description": "CALDERA API key for authentication.", "type": "secret", "required": false }
+        { "key": "CALDERA_API_KEY", "label": "API Key", "description": "CALDERA API key for authentication.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-CALDERA-API-URL", "label": "CALDERA API URL (multi-tenant header)", "description": "Per-request credential header carrying CALDERA_API_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-CALDERA-API-KEY", "label": "API Key (multi-tenant header)", "description": "Per-request credential header carrying CALDERA_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -223,7 +230,8 @@
       "runtime": { "type": "node", "package": "@modular-intelligence/credential-check", "bin": "mcp-credential-check" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
-        { "key": "HIBP_API_KEY", "label": "HIBP API Key", "description": "Have I Been Pwned API key for breach lookups.", "type": "secret", "required": false }
+        { "key": "HIBP_API_KEY", "label": "HIBP API Key", "description": "Have I Been Pwned API key for breach lookups.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-HIBP-API-KEY", "label": "HIBP API Key (multi-tenant header)", "description": "Per-request credential header carrying HIBP_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -241,7 +249,9 @@
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
         { "key": "DEFECTDOJO_URL", "label": "DefectDojo URL", "description": "Base URL of the DefectDojo instance.", "type": "url", "required": true, "placeholder": "https://defectdojo.example.com" },
-        { "key": "DEFECTDOJO_API_KEY", "label": "API Key", "description": "DefectDojo API key.", "type": "secret", "required": true }
+        { "key": "DEFECTDOJO_API_KEY", "label": "API Key", "description": "DefectDojo API key.", "type": "secret", "required": true },
+        { "key": "X-MCP-Cred-DEFECTDOJO-API-URL", "label": "DefectDojo URL (multi-tenant header)", "description": "Per-request credential header carrying DEFECTDOJO_API_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-DEFECTDOJO-API-KEY", "label": "API Key (multi-tenant header)", "description": "Per-request credential header carrying DEFECTDOJO_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -372,7 +382,9 @@
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
         { "key": "GOPHISH_URL", "label": "GoPhish API URL", "description": "Base URL of the GoPhish API.", "type": "url", "required": true, "placeholder": "https://localhost:3333" },
-        { "key": "GOPHISH_API_KEY", "label": "API Key", "description": "GoPhish API key for authentication.", "type": "secret", "required": true }
+        { "key": "GOPHISH_API_KEY", "label": "API Key", "description": "GoPhish API key for authentication.", "type": "secret", "required": true },
+        { "key": "X-MCP-Cred-GOPHISH-API-URL", "label": "GoPhish API URL (multi-tenant header)", "description": "Per-request credential header carrying GOPHISH_API_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-GOPHISH-API-KEY", "label": "API Key (multi-tenant header)", "description": "Per-request credential header carrying GOPHISH_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -486,7 +498,8 @@
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
         { "key": "HYBRID_ANALYSIS_API_KEY", "label": "Hybrid Analysis API Key", "type": "secret", "required": false },
-        { "key": "MALWAREBAZAAR_API_KEY", "label": "MalwareBazaar API Key", "type": "secret", "required": false }
+        { "key": "MALWAREBAZAAR_API_KEY", "label": "MalwareBazaar API Key", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-HYBRID-ANALYSIS-API-KEY", "label": "Hybrid Analysis API Key (multi-tenant header)", "description": "Per-request credential header carrying HYBRID_ANALYSIS_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -535,7 +548,8 @@
       "runtime": { "type": "node", "package": "@modular-intelligence/nuclei-scanner", "bin": "mcp-nuclei-scanner" },
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
-        { "key": "NUCLEI_API_KEY", "label": "Nuclei Cloud API Key", "description": "ProjectDiscovery Cloud API key. Optional — only needed for cloud-backed features.", "type": "secret", "required": false }
+        { "key": "NUCLEI_API_KEY", "label": "Nuclei Cloud API Key", "description": "ProjectDiscovery Cloud API key. Optional — only needed for cloud-backed features.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-NUCLEI-API-KEY", "label": "Nuclei Cloud API Key (multi-tenant header)", "description": "Per-request credential header carrying NUCLEI_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": [
@@ -640,7 +654,10 @@
       "parameters": [
         { "key": "AWS_ACCESS_KEY_ID", "label": "AWS Access Key ID", "description": "Required only by the S3 scan tool; other tools need no credentials.", "type": "secret", "required": false },
         { "key": "AWS_SECRET_ACCESS_KEY", "label": "AWS Secret Access Key", "type": "secret", "required": false },
-        { "key": "AWS_REGION", "label": "AWS Region", "type": "string", "required": false, "placeholder": "us-east-1" }
+        { "key": "AWS_REGION", "label": "AWS Region", "type": "string", "required": false, "placeholder": "us-east-1" },
+        { "key": "X-MCP-Cred-AWS-ACCESS-KEY-ID", "label": "AWS Access Key ID (multi-tenant header)", "description": "Per-request credential header carrying AWS_ACCESS_KEY_ID in multi-tenant mode (MCP_MULTI_TENANT=1). Used by the S3 scan tool. Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-AWS-SECRET-ACCESS-KEY", "label": "AWS Secret Access Key (multi-tenant header)", "description": "Per-request credential header carrying AWS_SECRET_ACCESS_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Used by the S3 scan tool. Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-AWS-REGION", "label": "AWS Region (multi-tenant header)", "description": "Per-request header carrying AWS_REGION in multi-tenant mode (MCP_MULTI_TENANT=1). Optional non-secret value; falls back to AWS_DEFAULT_REGION.", "type": "string", "required": false }
       ],
       "tools": [],
       "externalDeps": [
@@ -683,7 +700,14 @@
         { "key": "ELASTIC_API_KEY", "label": "Elasticsearch API Key", "type": "secret", "required": false },
         { "key": "WAZUH_URL", "label": "Wazuh URL", "type": "url", "required": false, "placeholder": "https://wazuh.example.com:55000" },
         { "key": "WAZUH_USER", "label": "Wazuh Username", "type": "string", "required": false },
-        { "key": "WAZUH_PASSWORD", "label": "Wazuh Password", "type": "secret", "required": false }
+        { "key": "WAZUH_PASSWORD", "label": "Wazuh Password", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-SPLUNK-URL", "label": "Splunk URL (multi-tenant header)", "description": "Per-request credential header carrying SPLUNK_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-SPLUNK-TOKEN", "label": "Splunk Token (multi-tenant header)", "description": "Per-request credential header carrying SPLUNK_TOKEN in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-ELASTIC-URL", "label": "Elasticsearch URL (multi-tenant header)", "description": "Per-request credential header carrying ELASTIC_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-ELASTIC-API-KEY", "label": "Elasticsearch API Key (multi-tenant header)", "description": "Per-request credential header carrying ELASTIC_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-WAZUH-URL", "label": "Wazuh URL (multi-tenant header)", "description": "Per-request credential header carrying WAZUH_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-WAZUH-USER", "label": "Wazuh Username (multi-tenant header)", "description": "Per-request credential header carrying WAZUH_USER in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "string", "required": false },
+        { "key": "X-MCP-Cred-WAZUH-PASSWORD", "label": "Wazuh Password (multi-tenant header)", "description": "Per-request credential header carrying WAZUH_PASSWORD in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -773,7 +797,11 @@
         { "key": "VIRUSTOTAL_API_KEY", "label": "VirusTotal API Key", "type": "secret", "required": false },
         { "key": "SHODAN_API_KEY", "label": "Shodan API Key", "type": "secret", "required": false },
         { "key": "ABUSEIPDB_API_KEY", "label": "AbuseIPDB API Key", "type": "secret", "required": false },
-        { "key": "OTX_API_KEY", "label": "AlienVault OTX API Key", "type": "secret", "required": false }
+        { "key": "OTX_API_KEY", "label": "AlienVault OTX API Key", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-VIRUSTOTAL-API-KEY", "label": "VirusTotal API Key (multi-tenant header)", "description": "Per-request credential header carrying VIRUSTOTAL_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-SHODAN-API-KEY", "label": "Shodan API Key (multi-tenant header)", "description": "Per-request credential header carrying SHODAN_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-ABUSEIPDB-API-KEY", "label": "AbuseIPDB API Key (multi-tenant header)", "description": "Per-request credential header carrying ABUSEIPDB_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false },
+        { "key": "X-MCP-Cred-OTX-API-KEY", "label": "AlienVault OTX API Key (multi-tenant header)", "description": "Per-request credential header carrying OTX_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -838,7 +866,9 @@
       "transport": { "type": "stdio", "command": "{{RUNTIME}}" },
       "parameters": [
         { "key": "VELOCIRAPTOR_API_URL", "label": "Velociraptor API URL", "type": "url", "required": true, "placeholder": "https://velociraptor.example.com:8001" },
-        { "key": "VELOCIRAPTOR_API_KEY", "label": "API Key", "type": "secret", "required": true }
+        { "key": "VELOCIRAPTOR_API_KEY", "label": "API Key", "type": "secret", "required": true },
+        { "key": "X-MCP-Cred-VELOCIRAPTOR-API-URL", "label": "Velociraptor API URL (multi-tenant header)", "description": "Per-request credential header carrying VELOCIRAPTOR_API_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-VELOCIRAPTOR-API-KEY", "label": "API Key (multi-tenant header)", "description": "Per-request credential header carrying VELOCIRAPTOR_API_KEY in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
@@ -891,7 +921,10 @@
       "parameters": [
         { "key": "WAZUH_API_URL", "label": "Wazuh API URL", "type": "url", "required": true, "placeholder": "https://wazuh.example.com:55000" },
         { "key": "WAZUH_API_USER", "label": "Username", "type": "string", "required": true, "default": "wazuh-wui" },
-        { "key": "WAZUH_API_PASSWORD", "label": "Password", "type": "secret", "required": true }
+        { "key": "WAZUH_API_PASSWORD", "label": "Password", "type": "secret", "required": true },
+        { "key": "X-MCP-Cred-WAZUH-API-URL", "label": "Wazuh API URL (multi-tenant header)", "description": "Per-request credential header carrying WAZUH_API_URL in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "url", "required": false },
+        { "key": "X-MCP-Cred-WAZUH-API-USER", "label": "Username (multi-tenant header)", "description": "Per-request credential header carrying WAZUH_API_USER in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "string", "required": false },
+        { "key": "X-MCP-Cred-WAZUH-API-PASSWORD", "label": "Password (multi-tenant header)", "description": "Per-request credential header carrying WAZUH_API_PASSWORD in multi-tenant mode (MCP_MULTI_TENANT=1). Injected by the deployment per request; the process environment is not consulted in that mode.", "type": "secret", "required": false }
       ],
       "tools": [],
       "externalDeps": []
